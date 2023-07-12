@@ -5,6 +5,16 @@
   /* maintains box size regardless of padding and margin  */
 }
 
+:root {
+  /* colour palette from https://coolors.co/palette/faf3dd-c8d5b9-8fc0a9-68b0ab-696d7d */
+  --green1: #faf3dd;
+  --green2: #c8d5b9;
+  --green3: #8fc0a9;
+  --green3b: #aecebf;
+  --green4: #68b0ab;
+  --green5: #696d7d;
+}
+
 body {
   font-family: 'Muli', sans-serif;
   display: flex;
@@ -15,12 +25,13 @@ body {
   overflow: hidden;
   /* hides any overflow, i.e. no scroll bars */
   margin: 0;
+  background-color: var(--green1);
 }
 
 .container {
   display: flex;
   /* flex box automatically sizes all elements the same in a row by default */
-  width: 90vw;
+  width: 96vw;
   /* sets width to 90% of the viewport width */
 }
 
@@ -31,7 +42,7 @@ body {
   /* NOTE that there was a project note saying that this might need to be set to 'cover' for large screens - I tried it out and it works MUCH better!!! */
   background-position: center;
   background-repeat: no-repeat;
-  height: 80vh;
+  height: 92vh;
   /* NOTE: vh rather than vw which I have used until now. viewport HEIGHT rather than viewport width */
   border-radius: 40px;
   /* Rounds off the corners of the image boxes. Note that the project specified 50px */
@@ -50,6 +61,10 @@ body {
   /* After looking at https://www.w3schools.com/css/css3_transitions.asp, the first parameter is what is being affected, the 2nd is obviously the delay and the 'ease in' means that the effect will start slowly. Note that  'ease-in-out' is also an option. The defaut is 'ease' which starts slow, gets fast, then ends slow */
 }
 
+.dark-text {
+  color: #67697c;
+}
+
 .panel h3 {
   font-size: 24px;
   position: absolute;
@@ -65,7 +80,7 @@ body {
 }
 
 .panel.active {
-  flex: 5;
+  flex: 7;
   /* 10x more than the flex-growth when not 'active' */
 }
 
@@ -84,7 +99,7 @@ body {
     /* the outer container will take 100vw (the whole screen width) from its previous default of 90vw (90%) */
   }
 
-  .panel:nth-of-type(4), .panel:nth-of-type(4) {
+  .panel:nth-of-type(6), .panel:nth-of-type(7) {
     /* the 4th and 5th panel... */
     display: none;
     /* will NOT be display - which makes them removed from the flow, take up no space, meaning more space for the remaiming 3 panels  */

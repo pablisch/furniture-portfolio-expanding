@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+  box-sizing: border-box; 
+  /* maintains box size regardless of padding and margin  */
+}
+
+body {
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* sets height to 100% of the vw (viewport width) */
+  overflow: hidden;
+  /* hides any overflow, i.e. no scroll bars */
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  /* flex box automatically sizes all elements the same in a row by default */
+  width: 90vw;
+  /* sets width to 90% of the viewport width */
+}
+
+.panel {
+  /* background-size: auto 100%; *** THIS WAS THE ORIGINAL PROJECT SPECIFICATION *** */
+  background-size: cover;
+  /* makes the whole image visible in the available space rather than just a tiny portion of it  */
+  /* NOTE that there was a project note saying that this might need to be set to 'cover' for large screens - I tried it out and it works MUCH better!!! */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  /* NOTE: vh rather than vw which I have used until now. viewport HEIGHT rather than viewport width */
+  border-radius: 40px;
+  /* Rounds off the corners of the image boxes. Note that the project specified 50px */
+  color: #fff; 
+  /* text colour of course */
+  cursor: pointer;
+  /* sets the cursor to a pointing hand while hovering over image boxes (.panel) rather than the arrow default */
+  flex: 0.5;
+  /* flex is made up of three values: flex-grow, flex-shrink and flex-basis (width). When there is only a single [number] value, it represents flex-grow. I have never come across a non-integer flex-grow value before and suppose it represents a very low value although as far as I have seen the importance is in an item's flex value relative to its sibling's flex-grow value  */
+  margin: 10px;
+  /* to separate the image panels */
+  position: relative;
+  /* position is relative to make the h3 text good whose position will be absolute. I did not get the reasoning which was not really explained. See https://www.udemy.com/course/50-projects-50-days/learn/lecture/23595182#questions at 4:56. */
+  transition: flex 0.7s ease-out; /* was ease-IN but I changed to ease-OUT. I prefer it */
+  /* haven't come across this before and don't know all the parameters but clearly takes 0.7 secs for the transition. This will be when one image panel becomes active/inactive */
+  /* After looking at https://www.w3schools.com/css/css3_transitions.asp, the first parameter is what is being affected, the 2nd is obviously the delay and the 'ease in' means that the effect will start slowly. Note that  'ease-in-out' is also an option. The defaut is 'ease' which starts slow, gets fast, then ends slow */
+}
+
+.panel h3 {
+  font-size: 24px;
+  position: absolute;
+  /* removes the h3 from the normal flow */
+  /* apperently required the parent div to be positioned relative though not yet sure why */
+  bottom: 20px;
+  /* 20px from the bottom  */
+  left: 20px;
+  /* 20px from the left  */
+  margin: 0;
+  opacity: 0;
+  /* makes the h3 text invisible when the panel is not active. Would visibilty: hidden; have done the same thing? */
+}
+
+.panel.active {
+  flex: 5;
+  /* 10x more than the flex-growth when not 'active' */
+}
+
+.panel.active h3 {
+  opacity: 1;
+  /* fully opaque when 'active' makes the h3 text visible */
+  transition: opacity 0.3s ease-out 0.5s;
+  /* affecting the 'opacity' creates a 0.3s transition with a slow end and a 0.4s delay before it starts - I upped the delay to 0.5s */
+  /* This is to allow the h3 text to settle before being visible as previously it jumped position as the panel expanded */
+}
+
+@media (max-width: 480px) {
+  /* on very small screens, i.e. under 480px... */
+  .container {
+    width: 100vw;
+    /* the outer container will take 100vw (the whole screen width) from its previous default of 90vw (90%) */
+  }
+
+  .panel:nth-of-type(4), .panel:nth-of-type(4) {
+    /* the 4th and 5th panel... */
+    display: none;
+    /* will NOT be display - which makes them removed from the flow, take up no space, meaning more space for the remaiming 3 panels  */
+  }
+}
+
